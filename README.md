@@ -1,2 +1,2 @@
 # Bittrex_Python
-Application to acess the Bittrex API with Python
+Application to access the Bittrex API with Python

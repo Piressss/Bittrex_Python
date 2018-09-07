@@ -9,4 +9,4 @@ from ApiKeyClass import *
 
 c = ApiKeyClass()
 
-c.Decrypt('none')
+print c.Decrypt('none')

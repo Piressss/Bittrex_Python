@@ -1,16 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# Esta implementa a funcao de criptografia da chave para acesso ao Bittrex
+# Esta implementa a funcao de decriptografia da requisicao da API
 
 from Crypto.Cipher import AES
-import json, getpass, hmac
+import json, getpass, hmac, hashlib
 
 class ApiKeyClass:
     def __init__(self):
-        self.ApiKey     = '68c9346c5d9b4f41b4d975c3b1928e69'
-        self.ApiSecret  = 'a6578e5952214d879acf45d8ff54a7fe'
-        self.ApiEncrypt = 'Null'
+        self.__ApiKey     = '68c9346c5d9b4f41b4d975c3b1928e69'
+        self.__ApiSecret  = 'a6578e5952214d879acf45d8ff54a7fe'
+        self.__ApiEncrypt = 'Null'
 
     # Sem uso
     def Encrypt(self):
@@ -28,5 +28,6 @@ class ApiKeyClass:
     # Utilizado para desencriptar o dado recebido do get feito para a api
     def Decrypt(self, api_resp):
         apisign = hmac.new(self.ApiSecret.encode(), api_resp.encode(), hashlib.sha512).hexdigest()
+        return apisign
 
      

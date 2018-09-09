@@ -9,6 +9,14 @@ from ApiAccessClass import *
 
 c = ApiAccessClass()
 
-print c.getAPI('buylimit')
-
+print 'Market Request'
 print c.getAPI('getopenorders', 'BTC-XRP')
+print '\n'
+
+print 'Public Request'
+print c.getAPI('getticker', 'BTC-XRP')
+print '\n'
+
+print 'Account Request'
+print c.getAPI('getbalance', 'BTC-SRN')
+print '\n'

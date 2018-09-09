@@ -8,66 +8,66 @@ from datetime import datetime
 # Dados de Balanço de uma Moeda
 class CurrencyBalanceDataClass:
     def __init__(self):
-        self.__Currency  = 'Null'
-        self.__Balance   = 0.00
-        self.__Available = 0.00
-        self.__Pending   = 0.00
+        self._Currency  = 'Null'
+        self._Balance   = 0.00
+        self._Available = 0.00
+        self._Pending   = 0.00
 
 # Dados de uma moeda
 class CurrencyData:
     def __init__(self):
-        self.__MarketName = 'Null'
-        self.__High       = 0.00
-        self.__Low        = 0.00
-        self.__Volume     = 0.00
-        self.__Last       = 0.00
-        self.__BaseVolume = 0.00
-        self.__Bid        = 0.00
-        self.__Ask        = 0.00
-        self.__OpenBuyOrders = 0
-        self.__OpenSellOrders = 0
+        self._MarketName = 'Null'
+        self._High       = 0.00
+        self._Low        = 0.00
+        self._Volume     = 0.00
+        self._Last       = 0.00
+        self._BaseVolume = 0.00
+        self._Bid        = 0.00
+        self._Ask        = 0.00
+        self._OpenBuyOrders = 0
+        self._OpenSellOrders = 0
 
 # Dados de Livro de Ordens
 class OrderBookData:
     def __init__(self):
-        self.__BuyQuantity    = 10*[0.00]
-        self.__BuyRate        = 10*[0.00]
-        self.__SellQuantity   = 10*[0.00]
-        self.__SellRate       = 10*[0.00]
+        self._BuyQuantity    = 10*[0.00]
+        self._BuyRate        = 10*[0.00]
+        self._SellQuantity   = 10*[0.00]
+        self._SellRate       = 10*[0.00]
 
 # Dados do Historico de uma moeda
 class CurrencyHistoryData:
     def __init__(self):
-        self.__Time           = 100*[datetime.now()]
-        self.__Quantity       = 100*[0.00]
-        self.__Price          = 100*[0.00]
-        self.__Total          = 100*[0.00]
-        self.__FillType       = 100*['Null']
-        self.__OrderType      = 100*['Null']
+        self._Time           = 100*[datetime.now()]
+        self._Quantity       = 100*[0.00]
+        self._Price          = 100*[0.00]
+        self._Total          = 100*[0.00]
+        self._FillType       = 100*['Null']
+        self._OrderType      = 100*['Null']
 
 # Dados de Ordens
 class OrderData:
     def __init__(self):
-        self.__OrderUuid      = ['Null']
-        self.__Currency       = ['Null']
-        self.__OrderType      = ['Null']
-        self.__Quantity       = 0.00
-        self.__Limit          = 0.00
-        self.__Price          = 0.00
-        self.__NumOrders      = 0
+        self._OrderUuid      = ['Null']
+        self._Currency       = ['Null']
+        self._OrderType      = ['Null']
+        self._Quantity       = 0.00
+        self._Limit          = 0.00
+        self._Price          = 0.00
+        self._NumOrders      = 0
 
 # Dados de Analise de Moeda
 class CurrencyAnalysisData:
     def __init__(self):
-        self.__Currency       = 'Null'
-        self.__Average        = 0.00
-        self.__Res            = [0.00,0.00]
-        self.__Sup            = [0.00,0.00]
-        self.__Wr             = 0.00
-        self.__Rsi            = 0.00
-        self.__Obv            = 0.00
-        self.__Volume         = 0.00
-        self.__Bid            = 0.00
-        self.__Last           = 0.00
-        self.__Ask            = 0.00
+        self._Currency       = 'Null'
+        self._Average        = 0.00
+        self._Res            = [0.00,0.00]
+        self._Sup            = [0.00,0.00]
+        self._Wr             = 0.00
+        self._Rsi            = 0.00
+        self._Obv            = 0.00
+        self._Volume         = 0.00
+        self._Bid            = 0.00
+        self._Last           = 0.00
+        self._Ask            = 0.00
 

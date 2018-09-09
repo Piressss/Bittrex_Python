@@ -57,6 +57,8 @@ class ApiAccessClass():
             print url
             sign = self.Encrypt(url)
             response = self.execRequest(url, sign)
+        else:
+            print 'Command not available'
 
         return response
                 

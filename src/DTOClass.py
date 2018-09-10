@@ -48,13 +48,14 @@ class CurrencyHistoryData:
 # Dados de Ordens
 class OrderData:
     def __init__(self):
-        self._OrderUuid      = ['Null']
-        self._Currency       = ['Null']
-        self._OrderType      = ['Null']
-        self._Quantity       = 0.00
-        self._Limit          = 0.00
-        self._Price          = 0.00
-        self._NumOrders      = 0
+        self._OrderUuid         = ['Null']
+        self._Currency          = ['Null']
+        self._OrderType         = ['Null']
+        self._Quantity          = 0.00
+        self._QuantityRemaining = 0.00
+        self._Limit             = 0.00
+        self._Price             = 0.00
+        self._NumOrders         = 0
 
 # Dados de Analise de Moeda
 class CurrencyAnalysisData:

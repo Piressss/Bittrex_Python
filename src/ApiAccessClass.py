@@ -53,7 +53,6 @@ class ApiAccessClass():
             if command == 'getbalance':
                 currency = currency.split('-')
                 url = url + '&currency=' + currency[1]
-            print url
             sign = self.Encrypt(url)
             response = self.execRequest(url, sign)
         else:

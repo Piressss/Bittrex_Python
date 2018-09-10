@@ -29,4 +29,67 @@ class PublicClass():
             data._Ask        = result[0].get(u'Ask') 
             data._OpenBuyOrders = result[0].get(u'OpenBuyOrders')
             data._OpenSellOrders = result[0].get(u'OpenSellOrders')
+            return data
+        else:
+            return 'Null'
 
+    def getValueCurrency(self, currency):
+        data = CurrencyData()
+        api = self.__apiAccess.getAPI('getticker', currency)
+        success = api.get(u'success')
+        if success == True:
+            result  = api[u'result']
+            print dict.keys(result)
+            data._MarketName = currency 
+            data._Last       = result.get(u'Last') 
+            data._Bid        = result.get(u'Bid') 
+            data._Ask        = result.get(u'Ask') 
+            return data
+        else:
+            return 'Null'
+    
+    def getOrderBook(self, currency):
+        data = OrderBookData()
+        api = self.__apiAccess.getAPI('getorderbook', currency)
+        success = api.get(u'success')
+        if success == True:
+            result  = api[u'result']
+            buy  = result.get(u'buy')
+            sell = result.get(u'sell')
+
+            if len(buy) > 10:
+                range_length = 10
+            else:
+                range_length = len(buy)
+            for i in range(range_length):
+                data._BuyQuantity[i] = buy[i].get(u'Quantity')
+                data._BuyRate[i]     = buy[i].get(u'Rate')
+            
+            if len(sell) > 10:
+                range_length = 10
+            else:
+                range_length = len(sell)
+            for i in range(range_length):
+                data._SellQuantity[i] = sell[i].get(u'Quantity')
+                data._SellRate[i]     = sell[i].get(u'Rate')
+            return data
+        else:
+            return 'Null'
+    
+    def getMarketHistoryCurrency(self, currency):
+        data = CurrencyHistoryData()
+        api = self.__apiAccess.getAPI('getmarkethistory', currency)
+        success = api.get(u'success')
+        if success == True:
+            result = api[u'result']
+            range_length = len(result)
+            for i in range(range_length):
+                data._Time[i]      = result[i].get(u'TimeStamp')
+                data._Quantity[i]  = result[i].get(u'Quantity')
+                data._Price[i]     = result[i].get(u'Price')
+                data._Total[i]     = result[i].get(u'Total')
+                data._FillType[i]  = result[i].get(u'FillType')
+                data._OrderType[i] = result[i].get(u'OrderType')
+            return data
+        else:
+            return 'Null'

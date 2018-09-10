@@ -8,4 +8,18 @@ from DTOClass import *
 
 c = PublicClass()
 
-c.getSummaryCurrency('BTC-XRP')
+a = c.getSummaryCurrency('BTC-XRP')
+print a._MarketName
+print "\n"
+
+a = c.getValueCurrency('BTC-XRP')
+print a._Last
+print "\n"
+
+a = c.getOrderBook('BTC-XRP')
+print a._BuyRate
+print "\n"
+
+a = c.getMarketHistoryCurrency('BTC-XRP')
+print a._Time
+print "\n"

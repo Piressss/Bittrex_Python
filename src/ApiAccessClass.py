@@ -9,13 +9,13 @@ from urllib import urlencode
 from Crypto.Cipher import AES
 
 class ApiAccessClass():
-    def __init__(self):
+    def __init__(self, apikey='Null', apisecret='Null'):
         self.__URL          = 'https://bittrex.com/api/v1.1/'
         self.__marketList   = ['selllimit', 'cancel', 'buylimit','getopenorders']
         self.__publicList   = ['getmarketsummary', 'getticker', 'getorderbook', 'getmarkethistory']
         self.__accountList  = ['getbalance', 'getorderhistory']
-        self.__ApiKey       = 'Null'
-        self.__ApiSecret    = 'Null'
+        self.__ApiKey       = apikey
+        self.__ApiSecret    = apisecret
 
     def getAPI(self, command, currency='None', quantity=0, rate=0, uuid='None'):
         url = self.__URL

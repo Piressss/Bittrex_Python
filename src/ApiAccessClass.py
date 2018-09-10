@@ -14,9 +14,8 @@ class ApiAccessClass():
         self.__marketList   = ['selllimit', 'cancel', 'buylimit','getopenorders']
         self.__publicList   = ['getmarketsummary', 'getticker', 'getorderbook', 'getmarkethistory']
         self.__accountList  = ['getbalance', 'getorderhistory']
-        self.__ApiKey       = '68c9346c5d9b4f41b4d975c3b1928e69'
-        self.__ApiSecret    = 'a6578e5952214d879acf45d8ff54a7fe'
-        self.__ApiEncrypt   = 'Null'
+        self.__ApiKey       = 'Null'
+        self.__ApiSecret    = 'Null'
 
     def getAPI(self, command, currency='None', quantity=0, rate=0, uuid='None'):
         url = self.__URL

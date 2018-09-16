@@ -29,7 +29,6 @@ class AccountClass():
     
     def getOrderHistory(self, currency):
         data = OrderData()
-        #api = self.__apiAccess.getAPI('getorderhistory', currency)
         api = self.__apiAccess.getAPI('getorderhistory')
         success = api.get(u'success')
         print api

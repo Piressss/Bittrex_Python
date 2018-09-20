@@ -75,9 +75,9 @@ class CurrencyAnalysisData:
 # Dados para Analise dos Candles
 class CandleData:
     def __init__(self):
-        self._BV            = 0.00
-        self._Close         = 0.00
-        self._High          = 0.00
-        self._Low           = 0.00
-        self._Open          = 0.00
-        self._Volume        = 0.00
+        self._BV            = [] 
+        self._Close         = []
+        self._High          = []
+        self._Low           = []
+        self._Open          = []
+        self._Volume        = []

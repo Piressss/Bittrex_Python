@@ -102,12 +102,12 @@ class PublicClass():
             result = api[u'result']
             range_length = len(result)
             for i in range(range_length):
-                data._BV            = result[i].get(u'BV') 
-                data._Close         = result[i].get(u'C') 
-                data._High          = result[i].get(u'H') 
-                data._Low           = result[i].get(u'L') 
-                data._Open          = result[i].get(u'O') 
-                data._Volume        = result[i].get(u'V') 
+                data._BV.append(result[i].get(u'BV'))
+                data._Close.append(result[i].get(u'C'))
+                data._High.append(result[i].get(u'H')) 
+                data._Low.append(result[i].get(u'L'))
+                data._Open.append(result[i].get(u'O'))
+                data._Volume.append(result[i].get(u'V'))
             return data
         else:
             return 'Null'

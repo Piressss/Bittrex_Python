@@ -93,3 +93,21 @@ class PublicClass():
             return data
         else:
             return 'Null'
+
+    def getCandles(self, currency):
+        data = CandleData()
+        api = self.__apiAccess.getAPI('GetTicks', currency)
+        success = api.get(u'success')
+        if success == True:
+            result = api[u'result']
+            range_length = len(result)
+            for i in range(range_length):
+                data._BV            = result[i].get(u'BV') 
+                data._Close         = result[i].get(u'C') 
+                data._High          = result[i].get(u'H') 
+                data._Low           = result[i].get(u'L') 
+                data._Open          = result[i].get(u'O') 
+                data._Volume        = result[i].get(u'V') 
+            return data
+        else:
+            return 'Null'

@@ -11,9 +11,11 @@ from Crypto.Cipher import AES
 class ApiAccessClass():
     def __init__(self, apikey='Null', apisecret='Null'):
         self.__URL          = 'https://bittrex.com/api/v1.1/'
+        self.__URL2         = 'https://bittrex.com/api/v2.0/'
         self.__marketList   = ['selllimit', 'cancel', 'buylimit','getopenorders']
         self.__publicList   = ['getmarketsummary', 'getticker', 'getorderbook', 'getmarkethistory']
         self.__accountList  = ['getbalance', 'getorderhistory']
+        self.__publicList2  = ['GetTicks']
         self.__ApiKey       = apikey
         self.__ApiSecret    = apisecret
 
@@ -55,6 +57,12 @@ class ApiAccessClass():
                 url = url + '&currency=' + currency[1]
             sign = self.Encrypt(url)
             response = self.execRequest(url, sign)
+        elif command in self.__publicList2:
+            url = self.__URL2
+            url = url + 'pub/market/GetTicks?'
+            url = url + 'marketName=' + currency
+            url = url + '&tickInterval=fiveMin'
+            response = self.execRequest(url, 'none')
         else:
             print 'Command not available'
 

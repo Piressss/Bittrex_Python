@@ -23,3 +23,7 @@ print "\n"
 a = c.getMarketHistoryCurrency('BTC-XRP')
 print a._Time
 print "\n"
+
+a = c.getCandles('BTC-XRP')
+print a._Low
+print "\n"

@@ -20,3 +20,7 @@ print '\n'
 print 'Account Request'
 print c.getAPI('getbalance', 'BTC-SRN')
 print '\n'
+
+print 'Public V2 Candles'
+print c.getAPI('GetTicks', 'BTC-XVG')
+print '\n'

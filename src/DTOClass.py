@@ -62,6 +62,7 @@ class CurrencyAnalysisData:
     def __init__(self):
         self._Currency       = 'Null'
         self._Average        = 0.00
+        self._Pivot          = 0.00
         self._Res            = [0.00,0.00]
         self._Sup            = [0.00,0.00]
         self._Wr             = 0.00

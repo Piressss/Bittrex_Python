@@ -39,7 +39,6 @@ class PublicClass():
         success = api.get(u'success')
         if success == True:
             result  = api[u'result']
-            print dict.keys(result)
             data._MarketName = currency 
             data._Last       = result.get(u'Last') 
             data._Bid        = result.get(u'Bid') 

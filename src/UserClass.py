@@ -58,6 +58,11 @@ class UserClass():
         Bid = calc_perc(result._Bid,result._Last)
         Ask = calc_perc(result._Ask,result._Last)
 
+        if result._DayGain >= 0:
+            DayGain = '\033[32m'+str("%.2f" %result._DayGain)+ "%"+ '\033[0;0m'
+        else: 
+            DayGain = '\033[31m'+str("%.2f" %result._DayGain)+ "%"+ '\033[0;0m'
+
         table = [["Currency", currency],
                 ["Pivot", "%.8f" %result._Pivot, Pivot],
                 ["Sup1", "%.8f" %result._Sup[0], Sup1],
@@ -71,7 +76,8 @@ class UserClass():
                 ["OBV", "%.0f" %result._Obv, Obv],
                 ["Last", "%.8f" %result._Last],
                 ["Bid", "%.8f" %result._Bid, Bid],
-                ["Ask", "%.8f" %result._Ask, Ask]]
+                ["Ask", "%.8f" %result._Ask, Ask],
+                ["DayGain", DayGain]]
 
         print tabulate(table)
 

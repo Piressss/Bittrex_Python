@@ -102,6 +102,15 @@ class AnalysisClass():
                 volume -= data._Volume[i]
         return volume
 
+    # Metodo que verifica o ganho nas ultimas 24h
+    def getCurrencyDayGain(self,currency):
+        data = self.__publicClass.getCandles(currency)
+        # Sao 288 amostras por dia e 12 amostras por hora
+        dayOpen = data._Open[len(data._Open)-288]
+        dayClose = data._Close[len(data._Close)-1]
+        return (((dayClose/dayOpen) *100) -100)
+        
+
     # Metodo que executa todas as Analises
     def getCurrencyAnalysis(self, currency, period):
         data = CurrencyAnalysisData()  
@@ -115,6 +124,8 @@ class AnalysisClass():
         data._Rsi = self.getCurrencyRSI(currency)
         # OBV
         data._Obv = self.getCurrencyOBV(currency, period)
+        # Gain
+        data._DayGain = self.getCurrencyDayGain(currency)
 
         # Para os demais valores preciso fazer outra consulta
         value = self.__publicClass.getSummaryCurrency(currency)

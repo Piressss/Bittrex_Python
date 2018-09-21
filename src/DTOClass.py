@@ -72,6 +72,7 @@ class CurrencyAnalysisData:
         self._Bid            = 0.00
         self._Last           = 0.00
         self._Ask            = 0.00
+        self._DayGain        = 0.00
 
 # Dados para Analise dos Candles
 class CandleData:

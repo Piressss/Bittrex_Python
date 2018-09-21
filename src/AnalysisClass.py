@@ -117,7 +117,7 @@ class AnalysisClass():
         data._Obv = self.getCurrencyOBV(currency, period)
 
         # Para os demais valores preciso fazer outra consulta
-        value = self.__publicClass.getValueCurrency(currency)
+        value = self.__publicClass.getSummaryCurrency(currency)
         data._Volume = value._Volume
         data._Bid    = value._Bid
         data._Ask    = value._Ask

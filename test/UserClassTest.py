@@ -10,8 +10,8 @@ from DTOClass import *
 
 key=''
 secret=''
-
+currency = sys.argv[1]
 
 c = UserClass(key,secret)
 
-c.getAnalysis('BTC-XRP')
+c.getAnalysis(currency)

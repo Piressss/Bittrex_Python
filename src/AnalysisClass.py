@@ -19,27 +19,30 @@ class AnalysisClass():
         maximo = 0
         minimo = 2**32
         data = self.__publicClass.getCandles(currency)
-        # encontro o maximo e o minimo do period estipulado
-        for i in range(len(data._High) - (12*period), len(data._High)):
-            if maximo < data._High[i]:
-                maximo = data._High[i]
-                index_max = i
-            if minimo > data._High[i]:
-                minimo = data._High[i]
-                index_min = i
-        # valor de fechamento do periodo
-        close = data._Close[len(data._Close)-1]
-        # calculo das informacoes
-        pivot           = (maximo+minimo+close)/3
-        result._Pivot   = pivot 
-        res1            = (2*pivot)-minimo
-        result._Res[0]  = res1 
-        sup1            = (2*pivot)-maximo
-        result._Sup[0]  = sup1 
-        result._Res[1]  = pivot + (res1-sup1)
-        result._Sup[1]  = pivot - (res1-sup1)
+        if data == 'Null':
+            return data
+        else:
+            # encontro o maximo e o minimo do period estipulado
+            for i in range(len(data._High) - (12*period), len(data._High)):
+                if maximo < data._High[i]:
+                    maximo = data._High[i]
+                    index_max = i
+                if minimo > data._High[i]:
+                    minimo = data._High[i]
+                    index_min = i
+            # valor de fechamento do periodo
+            close = data._Close[len(data._Close)-1]
+            # calculo das informacoes
+            pivot           = (maximo+minimo+close)/3
+            result._Pivot   = pivot 
+            res1            = (2*pivot)-minimo
+            result._Res[0]  = res1 
+            sup1            = (2*pivot)-maximo
+            result._Sup[0]  = sup1 
+            result._Res[1]  = pivot + (res1-sup1)
+            result._Sup[1]  = pivot - (res1-sup1)
 
-        return result 
+            return result 
 
     # Metodo para calculo da media simples
     def getCurrencyAverage(self, currency, period):

@@ -3,7 +3,7 @@
 
 # Classe que gera analises do mercado 
 
-import sys,os
+import sys
 sys.path.append('./')
 from PublicClass import *
 from DTOClass import *

@@ -47,14 +47,17 @@ class AnalysisClass():
     # Metodo para calculo da media simples
     def getCurrencyAverage(self, currency, period):
         data = self.__publicClass.getCandles(currency)
-        # inicializo o accumulador
-        acc = 0
-        # acumulo os valores de fechamento do periodo
-        for i in range(len(data._Close) - (12*period), len(data._Close)):
-            acc += data._Close[i]
-        # calculo a media
-        media = acc / (len(data._Close) - (len(data._Close)-(12*period)))
-        return media
+        if data == 'Null':
+            return data
+        else:
+            # inicializo o accumulador
+            acc = 0
+            # acumulo os valores de fechamento do periodo
+            for i in range(len(data._Close) - (12*period), len(data._Close)):
+                acc += data._Close[i]
+            # calculo a media
+            media = acc / (len(data._Close) - (len(data._Close)-(12*period)))
+            return media
     
     # Metodo para calculo do Williams %R
     def getCurrencyWR(self, currency, period):
@@ -62,17 +65,20 @@ class AnalysisClass():
         maximo = 0
         minimo = 2**32
         data = self.__publicClass.getCandles(currency)
-        # encontro o maximo e o minimo do periodo estipulado
-        for i in range(len(data._High) - (12*period), len(data._High)):
-            if maximo < data._High[i]:
-                maximo = data._High[i]
-            if minimo > data._High[i]:
-                minimo = data._High[i]
-            if i == len(data._High) - 1:
-                fechamento = data._Close[i]
-        # Calculo do WR 
-        wr = (maximo - fechamento) / (maximo - minimo) * (-100)
-        return wr
+        if data == 'Null':
+            return data
+        else:
+            # encontro o maximo e o minimo do periodo estipulado
+            for i in range(len(data._High) - (12*period), len(data._High)):
+                if maximo < data._High[i]:
+                    maximo = data._High[i]
+                if minimo > data._High[i]:
+                    minimo = data._High[i]
+                if i == len(data._High) - 1:
+                    fechamento = data._Close[i]
+            # Calculo do WR 
+            wr = (maximo - fechamento) / (maximo - minimo) * (-100)
+            return wr
 
     # Metodo para calculo do RSI
     def getCurrencyRSI(self, currency):
@@ -80,43 +86,51 @@ class AnalysisClass():
         incr = 0
         decr = 0
         data = self.__publicClass.getCandles(currency)
-        # encontro o maximo e o minimo do periodo estipulado
-        for i in range(len(data._Open) - 14, len(data._Open)):
-            if data._Open[i] > data._Close[i]:
-                decr += data._Close[i]
-            elif data._Open[i] < data._Close[i]:
-                incr += data._Close[i]
+        if data == 'Null':
+            return data
+        else:
+            # encontro o maximo e o minimo do periodo estipulado
+            for i in range(len(data._Open) - 14, len(data._Open)):
+                if data._Open[i] > data._Close[i]:
+                    decr += data._Close[i]
+                elif data._Open[i] < data._Close[i]:
+                    incr += data._Close[i]
 
-        # Calculo do RSI
-        incr = incr/14
-        decr = decr/14
-        rsi  = 100 - (100/(1+(incr/decr)))
-        return rsi
+            # Calculo do RSI
+            incr = incr/14
+            decr = decr/14
+            rsi  = 100 - (100/(1+(incr/decr)))
+            return rsi
 
     # Metodo para calculo do OBV
     def getCurrencyOBV(self, currency, period):
         data = self.__publicClass.getCandles(currency)
-        volume = 0
-        # encontro o maximo e o minimo do periodo estipulado
-        for i in range(len(data._Open) - (12*period), len(data._Open)):
-            if data._Open[i] < data._Close[i]:
-                volume += data._Volume[i]
-            elif data._Open[i] > data._Close[i]:
-                volume -= data._Volume[i]
-        return volume
+        if data == 'Null':
+            return data
+        else:
+            volume = 0
+            # encontro o maximo e o minimo do periodo estipulado
+            for i in range(len(data._Open) - (12*period), len(data._Open)):
+                if data._Open[i] < data._Close[i]:
+                    volume += data._Volume[i]
+                elif data._Open[i] > data._Close[i]:
+                    volume -= data._Volume[i]
+            return volume
 
     # Metodo que verifica o ganho nas ultimas 24h
     def getCurrencyDayGain(self,currency):
         data = self.__publicClass.getCandles(currency)
-        # Sao 288 amostras por dia e 12 amostras por hora
-        dayOpen = data._Open[len(data._Open)-288]
-        dayClose = data._Close[len(data._Close)-1]
-        return (((dayClose/dayOpen) *100) -100)
+        if data == 'Null':
+            return data
+        else:
+            # Sao 288 amostras por dia e 12 amostras por hora
+            dayOpen = data._Open[len(data._Open)-288]
+            dayClose = data._Close[len(data._Close)-1]
+            return (((dayClose/dayOpen) *100) -100)
         
 
     # Metodo que executa todas as Analises
     def getCurrencyAnalysis(self, currency, period):
-        data = CurrencyAnalysisData()  
         # pivot
         data = self.getCurrencyPivot(currency, period)
         # media
@@ -143,5 +157,7 @@ class AnalysisClass():
     def getTradeGain(self, currency, buy_rate):
         # Consulto o valor da moeda
         value = self.__publicClass.getValueCurrency(currency)
-
-        return (((value._Last/buy_rate) -1) * 100) 
+        if value == 'Null':
+            return value
+        else:
+            return (((value._Last/buy_rate) -1) * 100) 

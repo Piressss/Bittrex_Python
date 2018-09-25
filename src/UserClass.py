@@ -112,3 +112,8 @@ class UserClass():
     
     def buy(self, currency, quantity, rate):
         return self.__marketClass.buyOrder(currency, quantity, rate)
+
+    def tradeSell(self, currency, quantity, rate, gain):
+        if gain >= self.__analysisClass.getCurrencyDayGain(currency, rate):
+            while (self.sell != True)
+                

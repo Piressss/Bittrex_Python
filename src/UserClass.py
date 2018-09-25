@@ -81,3 +81,34 @@ class UserClass():
 
         print tabulate(table)
 
+    def getOpenOrders(self, currency):
+        data = self.__marketClass.getOpenOrders(currency)
+        if data == 'Null':
+            return data 
+        else:
+            if data._OrderUuid == '':
+                return 'Empty'
+            else:
+                return data._OrderUuid
+
+    def cancel(self, currency):
+        result = getOpenOrders(currency)
+        
+        # faz 5 tentativas antes de finalizar
+        if result == 'Null':
+            i = 0
+            while(i < 5 and result == 'Null'):
+                result = getOpenOrders(currency)
+                i += 1
+            if result == 'Null':
+                return False
+            elif result == '':
+                return False
+            else:
+                return result
+                
+    def sell(self, currency, quantity, rate):
+        return self.__marketClass.sellOrder(currency, quantity, rate)
+    
+    def buy(self, currency, quantity, rate):
+        return self.__marketClass.buyOrder(currency, quantity, rate)

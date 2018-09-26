@@ -4,7 +4,7 @@
 # Classe para acesso aos comandos da API Market, solicita o get da Api e 
 # formata o resultado para a classe DTO
 
-import sys,os
+import sys,os,time
 from tabulate import tabulate
 sys.path.append('./')
 from AnalysisClass import *
@@ -17,6 +17,7 @@ class UserClass():
     def __init__(self, apikey, apisecret):
         self.__marketClass = MarketClass(apikey, apisecret) 
         self.__analysisClass = AnalysisClass() 
+        self.__publicClass = PublicClass() 
 
     def getAnalysis(self, currency):
         result = self.__analysisClass.getCurrencyAnalysis(currency,12) 
@@ -114,6 +115,26 @@ class UserClass():
         return self.__marketClass.buyOrder(currency, quantity, rate)
 
     def tradeSell(self, currency, quantity, rate, gain):
-        if gain >= self.__analysisClass.getCurrencyDayGain(currency, rate):
-            while (self.sell != True)
-                
+        gain_measure = 'Null'
+        print "Medindo o Ganho"
+        while (gain_measure == 'Null'):
+            gain_measure = self.__analysisClass.getTradeGain(currency, rate)
+            time.sleep(1)
+        print "Verificando Métricas para o Ganho"
+        if (gain_measure >= gain) | (gain_measure <= -1 ):
+            print "Enviando Ordem de Venda"
+            sell = False
+            while (sell != True):
+                data = self.__publicClass.getValueCurrency(currency)
+                sell = self.sell(currency, quantity, data._Bid)
+                time.sleep(0.1)
+            selled = False
+            print "Verificando se a venda foi concluída"
+            while (selled != True):
+                data = self.__getOpenOrders(currency)
+                if (data._NumOrders == 0):
+                    selled = True
+                time.sleep(0.1)
+        else:
+            self.tradeSell(currency, quantity, rate, gain)
+

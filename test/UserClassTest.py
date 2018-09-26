@@ -14,4 +14,6 @@ currency = sys.argv[1]
 
 c = UserClass(key,secret)
 
-c.getAnalysis(currency)
+#c.getAnalysis(currency)
+
+c.tradeSell(currency, 100, 0.00000210, 2)

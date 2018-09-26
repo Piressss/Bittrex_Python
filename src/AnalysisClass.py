@@ -160,4 +160,4 @@ class AnalysisClass():
         if value == 'Null':
             return value
         else:
-            return (((value._Last/buy_rate) -1) * 100) 
+            return (((value._Bid/buy_rate) -1) * 100) 

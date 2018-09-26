@@ -13,8 +13,8 @@ class MarketClass():
     def __init__(self, apikey, apisecret):
         self.__apiAccess = ApiAccessClass(apikey, apisecret) 
     
-    def cancelOrder(self, currency):
-        api = self.__apiAccess.getAPI('cancel', currency)
+    def cancelOrder(self, order):
+        api = self.__apiAccess.getAPI('cancel', order)
         success = api.get(u'success')
         if success == True:
             return True

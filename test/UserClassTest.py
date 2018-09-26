@@ -16,4 +16,4 @@ c = UserClass(key,secret)
 
 #c.getAnalysis(currency)
 
-c.tradeSell(currency, 100, 0.00000210, 2)
+c.tradeSell(currency, 1000, 0.00000207, 2)

@@ -126,7 +126,8 @@ class UserClass():
             sell = False
             while (sell != True):
                 data = self.__publicClass.getValueCurrency(currency)
-                sell = self.sell(currency, quantity, data._Bid)
+                sell_rate = data._Bid
+                sell = self.sell(currency, quantity, sell_rate)
                 time.sleep(0.1)
             selled = False
             print "Verificando se a venda foi concluída"
@@ -134,7 +135,19 @@ class UserClass():
                 data = self.__getOpenOrders(currency)
                 if (data._NumOrders == 0):
                     selled = True
+                else:
+                    data = self.__publicClass.getValueCurrency(currency)
+                    if sell_rate >= (data._Bid * 1.015):
+                        break
                 time.sleep(0.1)
+            if selled == True:
+                print "Venda concretizada"
+            else:
+                cancel = False
+                while (cancel != False):
+                    cancel = self.__marketClass.cancel(data._OrderUuid)
+                    time.sleep(0.1)
+                print "Venda não concretizada"
         else:
             self.tradeSell(currency, quantity, rate, gain)
 

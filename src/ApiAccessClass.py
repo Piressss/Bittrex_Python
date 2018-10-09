@@ -67,16 +67,25 @@ class ApiAccessClass():
             print 'Command not available'
 
         # Tratamento de Erro
-        if response.get(u'message') == 'APIKEY_INVALID':
-            print response.get(u'message')
-            exit(1)
-        elif response.get(u'message') == 'INVALID_PERMISSION':
-            print response.get(u'message')
-            exit(1)
-        elif response.get(u'message') == 'DUST_TRADE_DISALLOWED_MIN_VALUE_50K_SAT':
-            print "Minimum value was not achieved"
-            exit(1)
-        elif response.get(u'message') == 'INSUFFICIENT_FUNDS':
+        #if response.get(u'message') == 'APIKEY_INVALID':
+        #    print response.get(u'message')
+        #    exit(1)
+        #elif response.get(u'message') == 'INVALID_PERMISSION':
+        #    print response.get(u'message')
+        #    exit(1)
+        #elif response.get(u'message') == 'DUST_TRADE_DISALLOWED_MIN_VALUE_50K_SAT':
+        #    print "MINIMUM VALUE WAS NOT ACHIEVED"
+        #    exit(1)
+        #elif response.get(u'message') == 'INSUFFICIENT_FUNDS':
+        #    print response.get(u'message')
+        #    exit(1)
+        #elif response.get(u'message') == 'INVALID_MARKET':
+        #    print response.get(u'message')
+        #    exit(1)
+        #elif response.get(u'message') != '':
+        #    print response.get(u'message')
+        #    exit(1)
+        if response.get(u'message') != '':
             print response.get(u'message')
             exit(1)
 

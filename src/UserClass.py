@@ -106,7 +106,12 @@ class UserClass():
             elif result == '':
                 return False
             else:
-                return result
+                for i in range(5):
+                    data = self.__marketClass.cancelOrder(result.get[u'OrderUuid'])
+                    if data == True:
+                        break
+        return data
+
                 
     def sell(self, currency, quantity, rate):
         return self.__marketClass.sellOrder(currency, quantity, rate)
@@ -151,3 +156,27 @@ class UserClass():
         else:
             self.tradeSell(currency, quantity, rate, gain)
 
+    def tradeBuy(self, currency, quantity, rate, gain):
+        print "Verificando o preço de compra"
+        data = self.__publicClass.getValueCurrency(currency)
+        # Verifico se o valor da compra não excede em mais de 1% o valor pedido
+        if (rate > (data._Ask * 1.01)):
+            print "Valor de compra maior que 1% do valor atual da moeda"
+            exit()
+        # Executamos a tentativa de compra por até 5 vezes
+        for i in range(5):
+            buystatus = self.buy(currency, quantity, rate)
+            if buystatus == True:
+                break
+            elif (i == 4):
+                # Tentativas excedidas
+                print "Compra não efetuada, TIMEOUT"
+                exit()
+            else:
+                data = self.__publicClass.getValueCurrency(currency)
+                # Verifico se o valor da compra está até 2% abaixo do valor atual da moeda 
+                if ((rate * 1.02) < data._Ask):
+                    print "Compra não efetuada, valor de compra menor que 2% do valor atual da moeda"
+                    exit()
+        # Compra foi efetuada, agora acompanhamos até obter ganho ou limite de perda
+        self.tradeSell(currency, quantity, rate, gain)

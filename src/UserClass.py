@@ -85,7 +85,7 @@ class UserClass():
     def getOpenOrders(self, currency):
         data = self.__marketClass.getOpenOrders(currency)
         if data == 'Null':
-            return data 
+            return 'Empty'
         else:
             if data._OrderUuid == '':
                 return 'Empty'
@@ -93,24 +93,23 @@ class UserClass():
                 return data._OrderUuid
 
     def cancel(self, currency):
-        result = getOpenOrders(currency)
+        result = self.getOpenOrders(currency)
         
         # faz 5 tentativas antes de finalizar
-        if result == 'Null':
+        if result == 'Null' or result == 'Empty':
             i = 0
             while(i < 5 and result == 'Null'):
                 result = getOpenOrders(currency)
                 i += 1
-            if result == 'Null':
+            if result == 'Null' or result == 'Empty':
                 return False
-            elif result == '':
-                return False
-            else:
-                for i in range(5):
-                    data = self.__marketClass.cancelOrder(result.get[u'OrderUuid'])
-                    if data == True:
-                        break
-        return data
+        else:
+            for i in range(5):
+                print result
+                data = self.__marketClass.cancelOrder(result)
+                if data == True:
+                    break
+            return data
 
                 
     def sell(self, currency, quantity, rate):
@@ -163,20 +162,30 @@ class UserClass():
         if (rate > (data._Ask * 1.01)):
             print "Valor de compra maior que 1% do valor atual da moeda"
             exit()
-        # Executamos a tentativa de compra por até 5 vezes
-        for i in range(5):
-            buystatus = self.buy(currency, quantity, rate)
-            if buystatus == True:
-                break
-            elif (i == 4):
-                # Tentativas excedidas
-                print "Compra não efetuada, TIMEOUT"
+        # Executamos a tentativa de compra
+        buystatus = self.buy(currency, quantity, rate)
+        if buystatus == True:
+            time.sleep(1)
+            for j in range(5):
+                if self.getOpenOrders(currency) != 'Empty':
+                    cancelstatus = self.cancel(currency)
+                    if cancelstatus == True:
+                        print 'Ordem Cancelada por nao ter sido efetivada'
+                        exit(1) 
+                    elif j == 4:
+                        print 'Nao foi possivel cancelar a ordem'
+                        exit(1)
+                    else:
+                        time.sleep(2)
+        elif (i == 4):
+            # Tentativas excedidas
+            print "Compra não efetuada, TIMEOUT"
+            exit()
+        else:
+            data = self.__publicClass.getValueCurrency(currency)
+            # Verifico se o valor da compra está até 2% abaixo do valor atual da moeda 
+            if ((rate * 1.02) < data._Ask):
+                print "Compra não efetuada, valor de compra menor que 2% do valor atual da moeda"
                 exit()
-            else:
-                data = self.__publicClass.getValueCurrency(currency)
-                # Verifico se o valor da compra está até 2% abaixo do valor atual da moeda 
-                if ((rate * 1.02) < data._Ask):
-                    print "Compra não efetuada, valor de compra menor que 2% do valor atual da moeda"
-                    exit()
         # Compra foi efetuada, agora acompanhamos até obter ganho ou limite de perda
         self.tradeSell(currency, quantity, rate, gain)

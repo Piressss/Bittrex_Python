@@ -10,12 +10,15 @@ from DTOClass import *
 
 key=''
 secret=''
-currency = sys.argv[1]
 
 c = UserClass(key,secret)
 
-c.getAnalysis(currency)
-
-#c.tradeSell(currency, 1000, 0.00000207, 2)
-
-c.tradeBuy(currency, 1000, 0.00001399, 2)
+if sys.argv[1] != 'sell' and sys.argv[1] != 'buy':
+    currency = sys.argv[1]
+    c.getAnalysis(currency)
+elif sys.argv[1] == 'buy':
+    currency = sys.argv[2]
+    c.tradeBuy(currency, int(sys.argv[3]), float(sys.argv[4]), int(sys.argv[5]))
+elif sys.argv[1] == 'sell':
+    currency = sys.argv[2]
+    c.tradeSell(currency, int(sys.argv[3]), float(sys.argv[4]), int(sys.argv[5]))

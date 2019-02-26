@@ -14,7 +14,7 @@ class MarketClass():
         self.__apiAccess = ApiAccessClass(apikey, apisecret) 
     
     def cancelOrder(self, order):
-        api = self.__apiAccess.getAPI('cancel', order)
+        api = self.__apiAccess.getAPI('cancel', 'None', 0, 0, order)
         success = api.get(u'success')
         if success == True:
             return True
